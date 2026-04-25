@@ -33,9 +33,9 @@ public class EmailService {
             message.setSubject("Código de Ativação - ClínicaPRJ");
             message.setText("Olá!\n\nSeu código de segurança é: " + codigo + "\n\nSeja bem-vindo!");
 
-            System.out.println("⏳ Conectando ao Gmail e enviando código para " + destinatario + "...");
+            System.out.println("Conectando ao Gmail e enviando código para " + destinatario + "...");
             Transport.send(message);
-            System.out.println("✅ E-mail enviado com sucesso!");
+            System.out.println("E-mail enviado com sucesso!");
 
         } catch (MessagingException e) {
             throw new RuntimeException("Falha ao enviar e-mail: " + e.getMessage());
