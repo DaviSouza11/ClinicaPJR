@@ -1,11 +1,13 @@
 package br.com.davi.clinica.service;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.stereotype.Service;
 
 import java.util.Properties;
-import javax.mail.*;
-import javax.mail.internet.*;
+import jakarta.mail.*;
+import jakarta.mail.internet.*;
 
+@Service
 public class EmailService {
 
     private final Dotenv dotenv =  Dotenv.load();

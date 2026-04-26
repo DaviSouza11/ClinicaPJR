@@ -2,6 +2,7 @@ package br.com.davi.clinica.dao;
 
 import br.com.davi.clinica.factory.ConnectionFactory;
 import br.com.davi.clinica.model.Usuario;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.*;
 
+@Repository
 public class UsuarioDAO {
 
     public int cadastrar(Usuario usuario) {
