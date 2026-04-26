@@ -4,6 +4,7 @@ import br.com.davi.clinica.factory.ConnectionFactory;
 import br.com.davi.clinica.model.Usuario;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,6 +13,12 @@ import java.sql.*;
 
 @Repository
 public class UsuarioDAO {
+
+    private final DataSource dataSource;
+
+    public UsuarioDAO(DataSource dataSource){
+        this.dataSource = dataSource;
+    }
 
     public int cadastrar(Usuario usuario) {
         String sql = "INSERT INTO usuarios (email, senha, perfil, ativo) VALUES (?, ?, ?, ?)";
@@ -29,9 +36,9 @@ public class UsuarioDAO {
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()){
                 return rs.getInt(1);
-            } return 0;
+            }
         } catch (SQLException e){
-            throw new RuntimeException("Erro ao criar usuário: " + e.getMessage());
+            throw new RuntimeException("Erro ao criar usuário: ", e);
         }
     }
 
@@ -39,7 +46,7 @@ public class UsuarioDAO {
 
         String sql = "Update usuarios SET ativo = ? Where id = ?";
 
-        try (Connection conn = new ConnectionFactory().getConnection();
+        try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)){
 
             stmt.setBoolean(1, true);
